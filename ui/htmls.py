@@ -66,7 +66,7 @@ NLLB_VRAM_TABLE = """
 <body>
 
 <details>
-  <summary>VRAM usage for each model</summary>
+  <summary>模型使用的显存大小</summary>
   <table>
     <thead>
       <tr>
@@ -89,7 +89,7 @@ NLLB_VRAM_TABLE = """
       </tr>
     </tbody>
   </table>
-  <p><strong>Note:</strong> Be mindful of your VRAM! The table above provides an approximate VRAM usage for each model.</p>
+  <p><strong>注意:</strong> 注意你的显存使用情况！上表提供了每个模型的近似显存使用情况。</p>
 </details>
 
 </body>

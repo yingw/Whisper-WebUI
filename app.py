@@ -43,29 +43,29 @@ class App:
                 with gr.Column():
                     gr.Markdown(MARKDOWN, elem_id="md_project")
             with gr.Tabs():
-                with gr.TabItem("File"):  # tab1
+                with gr.TabItem("文件"):  # tab1
                     with gr.Row():
-                        input_file = gr.Files(type="filepath", label="Upload File here")
+                        input_file = gr.Files(type="filepath", label="在这里上传文件")
                     with gr.Row():
                         dd_model = gr.Dropdown(choices=self.whisper_inf.available_models, value="large-v3",
-                                               label="Model")
-                        dd_lang = gr.Dropdown(choices=["Automatic Detection"] + self.whisper_inf.available_langs,
-                                              value="Automatic Detection", label="Language")
-                        dd_file_format = gr.Dropdown(["SRT", "WebVTT", "txt"], value="SRT", label="File Format")
+                                               label="模型")
+                        dd_lang = gr.Dropdown(choices=["自动检测"] + self.whisper_inf.available_langs,
+                                              value="自动检测", label="语言")
+                        dd_file_format = gr.Dropdown(["SRT", "WebVTT", "txt"], value="SRT", label="文件格式")
                     with gr.Row():
-                        cb_translate = gr.Checkbox(value=False, label="Translate to English?", interactive=True)
+                        cb_translate = gr.Checkbox(value=False, label="翻译成英语？", interactive=True)
                     with gr.Row():
-                        cb_timestamp = gr.Checkbox(value=True, label="Add a timestamp to the end of the filename", interactive=True)
-                    with gr.Accordion("Advanced_Parameters", open=False):
-                        nb_beam_size = gr.Number(label="Beam Size", value=1, precision=0, interactive=True)
-                        nb_log_prob_threshold = gr.Number(label="Log Probability Threshold", value=-1.0, interactive=True)
-                        nb_no_speech_threshold = gr.Number(label="No Speech Threshold", value=0.6, interactive=True)
-                        dd_compute_type = gr.Dropdown(label="Compute Type", choices=self.whisper_inf.available_compute_types, value=self.whisper_inf.current_compute_type, interactive=True)
+                        cb_timestamp = gr.Checkbox(value=True, label="在文件名末尾添加时间戳", interactive=True)
+                    with gr.Accordion("高级参数", open=False):
+                        nb_beam_size = gr.Number(label="Beam大小", value=1, precision=0, interactive=True)
+                        nb_log_prob_threshold = gr.Number(label="对数概率阈值", value=-1.0, interactive=True)
+                        nb_no_speech_threshold = gr.Number(label="无语音阈值", value=0.6, interactive=True)
+                        dd_compute_type = gr.Dropdown(label="计算类型", choices=self.whisper_inf.available_compute_types, value=self.whisper_inf.current_compute_type, interactive=True)
                     with gr.Row():
-                        btn_run = gr.Button("GENERATE SUBTITLE FILE", variant="primary")
+                        btn_run = gr.Button("生成字幕文件", variant="primary")
                     with gr.Row():
-                        tb_indicator = gr.Textbox(label="Output", scale=4)
-                        files_subtitles = gr.Files(label="Downloadable output file", scale=4, interactive=False)
+                        tb_indicator = gr.Textbox(label="输出", scale=4)
+                        files_subtitles = gr.Files(label="下载输出文件", scale=4, interactive=False)
                         btn_openfolder = gr.Button('📂', scale=1)
 
                     params = [input_file, dd_model, dd_lang, dd_file_format, cb_translate, cb_timestamp]
@@ -78,34 +78,34 @@ class App:
 
                 with gr.TabItem("Youtube"):  # tab2
                     with gr.Row():
-                        tb_youtubelink = gr.Textbox(label="Youtube Link")
+                        tb_youtubelink = gr.Textbox(label="Youtube链接")
                     with gr.Row(equal_height=True):
                         with gr.Column():
-                            img_thumbnail = gr.Image(label="Youtube Thumbnail")
+                            img_thumbnail = gr.Image(label="Youtube缩略图")
                         with gr.Column():
-                            tb_title = gr.Label(label="Youtube Title")
-                            tb_description = gr.Textbox(label="Youtube Description", max_lines=15)
+                            tb_title = gr.Label(label="Youtube标题")
+                            tb_description = gr.Textbox(label="Youtube描述", max_lines=15)
                     with gr.Row():
                         dd_model = gr.Dropdown(choices=self.whisper_inf.available_models, value="large-v3",
-                                               label="Model")
-                        dd_lang = gr.Dropdown(choices=["Automatic Detection"] + self.whisper_inf.available_langs,
-                                              value="Automatic Detection", label="Language")
-                        dd_file_format = gr.Dropdown(choices=["SRT", "WebVTT", "txt"], value="SRT", label="File Format")
+                                               label="模型")
+                        dd_lang = gr.Dropdown(choices=["自动检测"] + self.whisper_inf.available_langs,
+                                              value="自动检测", label="语言")
+                        dd_file_format = gr.Dropdown(choices=["SRT", "WebVTT", "txt"], value="SRT", label="文件格式")
                     with gr.Row():
-                        cb_translate = gr.Checkbox(value=False, label="Translate to English?", interactive=True)
+                        cb_translate = gr.Checkbox(value=False, label="翻译成英语？", interactive=True)
                     with gr.Row():
-                        cb_timestamp = gr.Checkbox(value=True, label="Add a timestamp to the end of the filename",
+                        cb_timestamp = gr.Checkbox(value=True, label="在文件名末尾添加时间戳",
                                                    interactive=True)
-                    with gr.Accordion("Advanced_Parameters", open=False):
-                        nb_beam_size = gr.Number(label="Beam Size", value=1, precision=0, interactive=True)
-                        nb_log_prob_threshold = gr.Number(label="Log Probability Threshold", value=-1.0, interactive=True)
-                        nb_no_speech_threshold = gr.Number(label="No Speech Threshold", value=0.6, interactive=True)
-                        dd_compute_type = gr.Dropdown(label="Compute Type", choices=self.whisper_inf.available_compute_types, value=self.whisper_inf.current_compute_type, interactive=True)
+                    with gr.Accordion("高级参数", open=False):
+                        nb_beam_size = gr.Number(label="Beam大小", value=1, precision=0, interactive=True)
+                        nb_log_prob_threshold = gr.Number(label="对数概率阈值", value=-1.0, interactive=True)
+                        nb_no_speech_threshold = gr.Number(label="无语音阈值", value=0.6, interactive=True)
+                        dd_compute_type = gr.Dropdown(label="计算类型", choices=self.whisper_inf.available_compute_types, value=self.whisper_inf.current_compute_type, interactive=True)
                     with gr.Row():
-                        btn_run = gr.Button("GENERATE SUBTITLE FILE", variant="primary")
+                        btn_run = gr.Button("生成字幕文件", variant="primary")
                     with gr.Row():
-                        tb_indicator = gr.Textbox(label="Output", scale=4)
-                        files_subtitles = gr.Files(label="Downloadable output file", scale=4)
+                        tb_indicator = gr.Textbox(label="输出", scale=4)
+                        files_subtitles = gr.Files(label="下载输出文件", scale=4)
                         btn_openfolder = gr.Button('📂', scale=1)
 
                     params = [tb_youtubelink, dd_model, dd_lang, dd_file_format, cb_translate, cb_timestamp]
@@ -118,27 +118,27 @@ class App:
                     btn_openfolder.click(fn=lambda: self.open_folder("outputs"), inputs=None, outputs=None)
                     dd_model.change(fn=self.on_change_models, inputs=[dd_model], outputs=[cb_translate])
 
-                with gr.TabItem("Mic"):  # tab3
+                with gr.TabItem("麦克风"):  # tab3
                     with gr.Row():
-                        mic_input = gr.Microphone(label="Record with Mic", type="filepath", interactive=True)
+                        mic_input = gr.Microphone(label="用麦克风录音", type="filepath", interactive=True)
                     with gr.Row():
                         dd_model = gr.Dropdown(choices=self.whisper_inf.available_models, value="large-v3",
-                                               label="Model")
-                        dd_lang = gr.Dropdown(choices=["Automatic Detection"] + self.whisper_inf.available_langs,
-                                              value="Automatic Detection", label="Language")
-                        dd_file_format = gr.Dropdown(["SRT", "WebVTT", "txt"], value="SRT", label="File Format")
+                                               label="模型")
+                        dd_lang = gr.Dropdown(choices=["自动检测"] + self.whisper_inf.available_langs,
+                                              value="自动检测", label="语言")
+                        dd_file_format = gr.Dropdown(["SRT", "WebVTT", "txt"], value="SRT", label="文件格式")
                     with gr.Row():
-                        cb_translate = gr.Checkbox(value=False, label="Translate to English?", interactive=True)
-                    with gr.Accordion("Advanced_Parameters", open=False):
-                        nb_beam_size = gr.Number(label="Beam Size", value=1, precision=0, interactive=True)
-                        nb_log_prob_threshold = gr.Number(label="Log Probability Threshold", value=-1.0, interactive=True)
-                        nb_no_speech_threshold = gr.Number(label="No Speech Threshold", value=0.6, interactive=True)
-                        dd_compute_type = gr.Dropdown(label="Compute Type", choices=self.whisper_inf.available_compute_types, value=self.whisper_inf.current_compute_type, interactive=True)
+                        cb_translate = gr.Checkbox(value=False, label="翻译成英语？", interactive=True)
+                    with gr.Accordion("高级参数", open=False):
+                        nb_beam_size = gr.Number(label="Beam大小", value=1, precision=0, interactive=True)
+                        nb_log_prob_threshold = gr.Number(label="对数概率阈值", value=-1.0, interactive=True)
+                        nb_no_speech_threshold = gr.Number(label="无语音阈值", value=0.6, interactive=True)
+                        dd_compute_type = gr.Dropdown(label="计算类型", choices=self.whisper_inf.available_compute_types, value=self.whisper_inf.current_compute_type, interactive=True)
                     with gr.Row():
-                        btn_run = gr.Button("GENERATE SUBTITLE FILE", variant="primary")
+                        btn_run = gr.Button("生成字幕文件", variant="primary")
                     with gr.Row():
-                        tb_indicator = gr.Textbox(label="Output", scale=4)
-                        files_subtitles = gr.Files(label="Downloadable output file", scale=4)
+                        tb_indicator = gr.Textbox(label="输出", scale=4)
+                        files_subtitles = gr.Files(label="下载输出文件", scale=4)
                         btn_openfolder = gr.Button('📂', scale=1)
 
                     params = [mic_input, dd_model, dd_lang, dd_file_format, cb_translate]
@@ -149,29 +149,29 @@ class App:
                     btn_openfolder.click(fn=lambda: self.open_folder("outputs"), inputs=None, outputs=None)
                     dd_model.change(fn=self.on_change_models, inputs=[dd_model], outputs=[cb_translate])
 
-                with gr.TabItem("T2T Translation"):  # tab 4
+                with gr.TabItem("文本翻译"):  # tab 4
                     with gr.Row():
-                        file_subs = gr.Files(type="filepath", label="Upload Subtitle Files to translate here",
+                        file_subs = gr.Files(type="filepath", label="在这里上传字幕文件以进行翻译",
                                              file_types=['.vtt', '.srt'])
 
                     with gr.TabItem("DeepL API"):  # sub tab1
                         with gr.Row():
-                            tb_authkey = gr.Textbox(label="Your Auth Key (API KEY)",
+                            tb_authkey = gr.Textbox(label="你的Auth Key (API KEY)",
                                                     value="")
                         with gr.Row():
-                            dd_deepl_sourcelang = gr.Dropdown(label="Source Language", value="Automatic Detection",
+                            dd_deepl_sourcelang = gr.Dropdown(label="源语言", value="Automatic Detection",
                                                               choices=list(
                                                                   self.deepl_api.available_source_langs.keys()))
-                            dd_deepl_targetlang = gr.Dropdown(label="Target Language", value="English",
+                            dd_deepl_targetlang = gr.Dropdown(label="目标语言", value="English",
                                                               choices=list(
                                                                   self.deepl_api.available_target_langs.keys()))
                         with gr.Row():
-                            cb_deepl_ispro = gr.Checkbox(label="Pro User?", value=False)
+                            cb_deepl_ispro = gr.Checkbox(label="专业版用户?", value=False)
                         with gr.Row():
-                            btn_run = gr.Button("TRANSLATE SUBTITLE FILE", variant="primary")
+                            btn_run = gr.Button("翻译字幕文件", variant="primary")
                         with gr.Row():
-                            tb_indicator = gr.Textbox(label="Output", scale=4)
-                            files_subtitles = gr.Files(label="Downloadable output file", scale=4)
+                            tb_indicator = gr.Textbox(label="输出", scale=4)
+                            files_subtitles = gr.Files(label="下载输出文件", scale=4)
                             btn_openfolder = gr.Button('📂', scale=1)
 
                     btn_run.click(fn=self.deepl_api.translate_deepl,
@@ -185,20 +185,20 @@ class App:
 
                     with gr.TabItem("NLLB"):  # sub tab2
                         with gr.Row():
-                            dd_nllb_model = gr.Dropdown(label="Model", value=self.nllb_inf.default_model_size,
+                            dd_nllb_model = gr.Dropdown(label="模型", value=self.nllb_inf.default_model_size,
                                                         choices=self.nllb_inf.available_models)
-                            dd_nllb_sourcelang = gr.Dropdown(label="Source Language",
+                            dd_nllb_sourcelang = gr.Dropdown(label="源语言",
                                                              choices=self.nllb_inf.available_source_langs)
-                            dd_nllb_targetlang = gr.Dropdown(label="Target Language",
+                            dd_nllb_targetlang = gr.Dropdown(label="目标语言",
                                                              choices=self.nllb_inf.available_target_langs)
                         with gr.Row():
-                            cb_timestamp = gr.Checkbox(value=True, label="Add a timestamp to the end of the filename",
+                            cb_timestamp = gr.Checkbox(value=True, label="在文件名末尾添加时间戳",
                                                        interactive=True)
                         with gr.Row():
-                            btn_run = gr.Button("TRANSLATE SUBTITLE FILE", variant="primary")
+                            btn_run = gr.Button("翻译字幕文件", variant="primary")
                         with gr.Row():
-                            tb_indicator = gr.Textbox(label="Output", scale=4)
-                            files_subtitles = gr.Files(label="Downloadable output file", scale=4)
+                            tb_indicator = gr.Textbox(label="输出", scale=4)
+                            files_subtitles = gr.Files(label="下载输出文件", scale=4)
                             btn_openfolder = gr.Button('📂', scale=1)
                         with gr.Column():
                             md_vram_table = gr.HTML(NLLB_VRAM_TABLE, elem_id="md_nllb_vram_table")
@@ -226,14 +226,14 @@ class App:
 
 # Create the parser for command-line arguments
 parser = argparse.ArgumentParser()
-parser.add_argument('--disable_faster_whisper', type=bool, default=False, nargs='?', const=True, help='Disable the faster_whisper implementation. faster_whipser is implemented by https://github.com/guillaumekln/faster-whisper')
-parser.add_argument('--share', type=bool, default=False, nargs='?', const=True, help='Gradio share value')
-parser.add_argument('--server_name', type=str, default=None, help='Gradio server host')
-parser.add_argument('--server_port', type=int, default=None, help='Gradio server port')
-parser.add_argument('--username', type=str, default=None, help='Gradio authentication username')
-parser.add_argument('--password', type=str, default=None, help='Gradio authentication password')
-parser.add_argument('--theme', type=str, default=None, help='Gradio Blocks theme')
-parser.add_argument('--colab', type=bool, default=False, nargs='?', const=True, help='Is colab user or not')
+parser.add_argument('--disable_faster_whisper', type=bool, default=False, nargs='?', const=True, help='禁用faster_whisper实现。faster_whipser：https://github.com/guillaumekln/faster-whisper')
+parser.add_argument('--share', type=bool, default=False, nargs='?', const=True, help='Gradio共享值')
+parser.add_argument('--server_name', type=str, default=None, help='Gradio服务器主机')
+parser.add_argument('--server_port', type=int, default=None, help='Gradio服务器端口')
+parser.add_argument('--username', type=str, default=None, help='Gradio认证用户名')
+parser.add_argument('--password', type=str, default=None, help='Gradio认证密码')
+parser.add_argument('--theme', type=str, default=None, help='Gradio Blocks主题')
+parser.add_argument('--colab', type=bool, default=False, nargs='?', const=True, help='是否为colab用户')
 _args = parser.parse_args()
 
 if __name__ == "__main__":

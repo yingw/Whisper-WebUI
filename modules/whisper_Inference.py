@@ -82,7 +82,7 @@ class WhisperInference(BaseInterface):
 
             files_info = {}
             for fileobj in fileobjs:
-                progress(0, desc="Loading Audio..")
+                progress(0, desc="正在加载音频……")
                 audio = whisper.load_audio(fileobj.name)
 
                 result, elapsed_time = self.transcribe(audio=audio,
@@ -94,7 +94,7 @@ class WhisperInference(BaseInterface):
                                                        compute_type=compute_type,
                                                        progress=progress
                                                        )
-                progress(1, desc="Completed!")
+                progress(1, desc="完成！")
 
                 file_name, file_ext = os.path.splitext(os.path.basename(fileobj.name))
                 file_name = safe_filename(file_name)
@@ -178,7 +178,7 @@ class WhisperInference(BaseInterface):
         try:
             self.update_model_if_needed(model_size=model_size, compute_type=compute_type, progress=progress)
 
-            progress(0, desc="Loading Audio from Youtube..")
+            progress(0, desc="正在从Youtube加载音频……")
             yt = get_ytdata(youtubelink)
             audio = whisper.load_audio(get_ytaudio(yt))
 
@@ -190,7 +190,7 @@ class WhisperInference(BaseInterface):
                                                    no_speech_threshold=no_speech_threshold,
                                                    compute_type=compute_type,
                                                    progress=progress)
-            progress(1, desc="Completed!")
+            progress(1, desc="完成！")
 
             file_name = safe_filename(yt.title)
             subtitle, file_path = self.generate_and_write_file(
@@ -203,7 +203,7 @@ class WhisperInference(BaseInterface):
             gr_str = f"Done in {self.format_time(elapsed_time)}! Subtitle file is in the outputs folder.\n\n{subtitle}"
             return [gr_str, file_path]
         except Exception as e:
-            print(f"Error transcribing youtube video: {str(e)}")
+            print(f"转录Youtube视频出错: {str(e)}")
         finally:
             try:
                 if 'yt' not in locals():
@@ -276,7 +276,7 @@ class WhisperInference(BaseInterface):
                                                    no_speech_threshold=no_speech_threshold,
                                                    compute_type=compute_type,
                                                    progress=progress)
-            progress(1, desc="Completed!")
+            progress(1, desc="完成！")
 
             subtitle, file_path = self.generate_and_write_file(
                 file_name="Mic",
@@ -288,7 +288,7 @@ class WhisperInference(BaseInterface):
             gr_str = f"Done in {self.format_time(elapsed_time)}! Subtitle file is in the outputs folder.\n\n{subtitle}"
             return [gr_str, file_path]
         except Exception as e:
-            print(f"Error transcribing mic: {str(e)}")
+            print(f"转录麦克风出错: {str(e)}")
         finally:
             self.release_cuda_memory()
             self.remove_input_files([micaudio])
@@ -339,7 +339,7 @@ class WhisperInference(BaseInterface):
         start_time = time.time()
 
         def progress_callback(progress_value):
-            progress(progress_value, desc="Transcribing..")
+            progress(progress_value, desc="正在转录……")
 
         if lang == "Automatic Detection":
             lang = None
@@ -369,7 +369,7 @@ class WhisperInference(BaseInterface):
         if compute_type != self.current_compute_type:
             self.current_compute_type = compute_type
         if model_size != self.current_model_size or self.model is None:
-            progress(0, desc="Initializing Model..")
+            progress(0, desc="正在初始化模型……")
             self.current_model_size = model_size
             self.model = whisper.load_model(
                 name=model_size,
